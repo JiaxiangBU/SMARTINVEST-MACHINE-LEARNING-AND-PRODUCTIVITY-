@@ -56,44 +56,55 @@ colnames(Portfolio.performance)=rownames(Portfolio.selected)
 Portfolio.performance.Return=Return.portfolio(Portfolio.performance)
 RFRmonthly=monthlyReturn(RFRxts)[year.performance]
 SharpeRatio.annualized(Portfolio.performance.Return, Rf =RFRmonthly, scale = 12, geometric = TRUE)
-Simnumb=100
-Nport=20
-Simulated.Portfolio= matrix(0,nrow=Simnumb,ncol=1)
-rownames(Simulated.Portfolio)=paste("Portfolio_",1:Simnumb)
-colnames(Simulated.Portfolio)="Sharpe.Ratio"
-TR=get(Final.consolidated.data.2000.2017[17])
-year.performance='2016'
+
+Simnumb = 100
+Nport = 20
+Simulated.Portfolio = matrix(0, nrow = Simnumb, ncol = 1)
+rownames(Simulated.Portfolio) = paste("Portfolio_", 1:Simnumb)
+colnames(Simulated.Portfolio) = "Sharpe.Ratio"
+TR = get(Final.consolidated.data.2000.2017[17])
+year.performance = '2016'
 for (i in 1:100) {
-Portoflio_Companies=""
-selected<-sample(1:nrow(TR), 20, replace=F)
-for (j in 1:Nport){
-Num=selected[j]
-Portoflio_Companies=c(Portoflio_Companies,rownames(TR)[Num])
-}
-Portfolio.selected<-TR[Portoflio_Companies[-1],]
-Portfolio.performance<-matrix(0,nrow=12,ncol=1)
-for (k in 1:nrow(Portfolio.selected)) {
-Portfolio.performance=cbind(Portfolio.performance,monthlyReturn(get(rownames(Portfolio.selected)[k])[,'Close'])[year.performance])
-}
-Portfolio.performance=Portfolio.performance[,-1]
-colnames(Portfolio.performance)=rownames(Portfolio.selected)
-Portfolio.performance.Return=Return.portfolio(Portfolio.performance)
-RFRmonthly=monthlyReturn(RFRxts)[year.performance]
-Simulated.Portfolio[i,1]=SharpeRatio.annualized(Portfolio.performance.Return, Rf =RFRmonthly, scale = 12, geometric = TRUE)
-assign(rownames(Simulated.Portfolio)[i],Portfolio.selected)
+    Portoflio_Companies = ""
+    selected <- sample(1:nrow(TR), 20, replace = F)
+    for (j in 1:Nport) {
+        Num = selected[j]
+        Portoflio_Companies = c(Portoflio_Companies, rownames(TR)[Num])
+    }
+    Portfolio.selected <- TR[Portoflio_Companies[-1], ]
+    Portfolio.performance <- matrix(0, nrow = 12, ncol = 1)
+    for (k in 1:nrow(Portfolio.selected)) {
+        Portfolio.performance = cbind(Portfolio.performance, monthlyReturn(get(rownames(
+            Portfolio.selected
+        )[k])[, 'Close'])[year.performance])
+    }
+    Portfolio.performance = Portfolio.performance[, -1]
+    colnames(Portfolio.performance) = rownames(Portfolio.selected)
+    Portfolio.performance.Return = Return.portfolio(Portfolio.performance)
+    RFRmonthly = monthlyReturn(RFRxts)[year.performance]
+    Simulated.Portfolio[i, 1] = SharpeRatio.annualized(
+        Portfolio.performance.Return,
+        Rf = RFRmonthly,
+        scale = 12,
+        geometric = TRUE
+    )
+    assign(rownames(Simulated.Portfolio)[i], Portfolio.selected)
 }
 Simulated.Portfolio
 get("Portfolio_ 23")
-Drop=NA
-TR=get(Final.consolidated.data.2000.2017[17])[!( get(Final.consolidated.data.2000.2017[17])[,1]%in% Drops), ]
-TR[,1]
-TR=get(Final.consolidated.data.2000.2017[17])
-TR=[!(TR[,1]%in% Drops), ]
-Drop=NA
-TR=get(Final.consolidated.data.2000.2017[17])
-TR=TR[!(TR[,1] %in% Drop), ]
+Drop = NA
+TR = get(Final.consolidated.data.2000.2017[17])[!(get(Final.consolidated.data.2000.2017[17])[, 1] %in% Drops),]
+TR[, 1]
+TR = get(Final.consolidated.data.2000.2017[17])
+TR = [!(TR[, 1] %in% Drops),]
+Drop = NA
+TR = get(Final.consolidated.data.2000.2017[17])
+TR = TR[!(TR[, 1] %in% Drop),]
 TR
-TR[,1]
+TR[, 1]
+
+
+
 Simnumb=100
 Nport=20
 Simulated.Portfolio= matrix(0,nrow=Simnumb,ncol=1)
@@ -162,50 +173,106 @@ get(rownames(Portfolio.selected)[i])
 Portfolio.selected
 i
 nrow(Portfolio.selected)
-Simnumb=100
-Nport=20
-Simulated.Portfolio= matrix(0,nrow=Simnumb,ncol=1)
-rownames(Simulated.Portfolio)=paste("Portfolio_",1:Simnumb)
-colnames(Simulated.Portfolio)="Sharpe.Ratio"
-Drop=NA
-TR=get(Final.consolidated.data.2000.2017[17])
-TR=TR[!(TR[,1] %in% Drop), ]
-year.performance='2016'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Simnumb = 100
+Nport = 20
+Simulated.Portfolio = matrix(0, nrow = Simnumb, ncol = 1)
+rownames(Simulated.Portfolio) = paste("Portfolio_", 1:Simnumb)
+colnames(Simulated.Portfolio) = "Sharpe.Ratio"
+Drop = NA
+TR = get(Final.consolidated.data.2000.2017[17])
+TR = TR[!(TR[, 1] %in% Drop),]
+year.performance = '2016'
 for (i in 1:100) {
-Portoflio_Companies=""
-selected<-sample(1:nrow(TR), 20, replace=F)
-for (j in 1:Nport){
-Num=selected[j]
-Portoflio_Companies=c(Portoflio_Companies,rownames(TR)[Num])
+    Portoflio_Companies = ""
+    selected <- sample(1:nrow(TR), 20, replace = F)
+    for (j in 1:Nport) {
+        Num = selected[j]
+        Portoflio_Companies = c(Portoflio_Companies, rownames(TR)[Num])
+    }
+    Portfolio.selected <- TR[Portoflio_Companies[-1], ]
+    NP = nrow(monthlyReturn(get(rownames(
+        Portfolio.selected
+    )[i])[, 'Close'])[year.performance])
+    Portfolio.performance <- matrix(0, nrow = NP, ncol = 1)
+    for (k in 1:nrow(Portfolio.selected)) {
+        Portfolio.performance = cbind(Portfolio.performance, monthlyReturn(get(rownames(
+            Portfolio.selected
+        )[k])[, 'Close'])[year.performance])
+    }
+    Portfolio.performance = Portfolio.performance[, -1]
+    colnames(Portfolio.performance) = rownames(Portfolio.selected)
+    Portfolio.performance.Return = Return.portfolio(Portfolio.performance)
+    RFRmonthly = monthlyReturn(RFRxts)[year.performance]
+    SharpeRatio.annualized(
+        Portfolio.performance.Return,
+        Rf = RFRmonthly,
+        scale = 12,
+        geometric = TRUE
+    )
+    assign(rownames(Simulated.Portfolio)[i], Portfolio.selected)
 }
-Portfolio.selected<-TR[Portoflio_Companies[-1],]
-NP=nrow(monthlyReturn(get(rownames(Portfolio.selected)[i])[,'Close'])[year.performance])
-Portfolio.performance<-matrix(0,nrow=NP,ncol=1)
+Portfolio.performance <- list()
 for (k in 1:nrow(Portfolio.selected)) {
-Portfolio.performance=cbind(Portfolio.performance,monthlyReturn(get(rownames(Portfolio.selected)[k])[,'Close'])[year.performance])
+    Portfolio.performance[[k]] <-
+        monthlyReturn(get(rownames(Portfolio.selected)[k])[, 'Close'])[year.performance]
 }
-Portfolio.performance=Portfolio.performance[,-1]
-colnames(Portfolio.performance)=rownames(Portfolio.selected)
-Portfolio.performance.Return=Return.portfolio(Portfolio.performance)
-RFRmonthly=monthlyReturn(RFRxts)[year.performance]
-SharpeRatio.annualized(Portfolio.performance.Return, Rf =RFRmonthly, scale = 12, geometric = TRUE)
-assign(rownames(Simulated.Portfolio)[i],Portfolio.selected)
-}
-Portfolio.performance<-list()
-for (k in 1:nrow(Portfolio.selected)) {
-Portfolio.performance[[k]]<-monthlyReturn(get(rownames(Portfolio.selected)[k])[,'Close'])[year.performance]
-}
-Portfolio.performance<-data.frame(Portfolio.performance)
+Portfolio.performance <- data.frame(Portfolio.performance)
 Portfolio.performance
-Portfolio.performance<-list()
+Portfolio.performance <- list()
 for (k in 1:nrow(Portfolio.selected)) {
-Portfolio.performance[[k]]<-monthlyReturn(get(rownames(Portfolio.selected)[k])[,'Close'])[year.performance]
+    Portfolio.performance[[k]] <-
+        monthlyReturn(get(rownames(Portfolio.selected)[k])[, 'Close'])[year.performance]
 }
-Portfolio.performance<-data.frame(Portfolio.performance)
-colnames(Portfolio.performance)=rownames(Portfolio.selected)
-Portfolio.performance.Return=Return.portfolio(Portfolio.performance)
-RFRmonthly=monthlyReturn(RFRxts)[year.performance]
-SharpeRatio.annualized(Portfolio.performance.Return, Rf =RFRmonthly, scale = 12, geometric = TRUE)
+Portfolio.performance <- data.frame(Portfolio.performance)
+colnames(Portfolio.performance) = rownames(Portfolio.selected)
+Portfolio.performance.Return = Return.portfolio(Portfolio.performance)
+RFRmonthly = monthlyReturn(RFRxts)[year.performance]
+SharpeRatio.annualized(
+    Portfolio.performance.Return,
+    Rf = RFRmonthly,
+    scale = 12,
+    geometric = TRUE
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Simnumb=100
 Nport=20
 Simulated.Portfolio= matrix(0,nrow=Simnumb,ncol=1)
@@ -245,7 +312,7 @@ get("Fortive.Corp RET")
 Final.consolidated.data.2000.2017= matrix(0,nrow=(2017-2000+1),ncol=1)
 rownames(Final.consolidated.data.2000.2017)=paste(2000:2017)
 Final.consolidated.data.2000.2017[,1]=paste("MRET_METRICS_",2000:2017)
-for (l in 1:length(Final.consolidated.data.2000.2017)){ 
+for (l in 1:length(Final.consolidated.data.2000.2017)){
 Drops<-c('01','02','03','04','05','06','07','08','09','10','11','12')
 assign(Final.consolidated.data.2000.2017[l,1],cbind(get(Monthly.return.data.2000.2017[l,]),get(METRICS.data.2000.2017[l,])))
 }
